@@ -1,0 +1,372 @@
+@charset "utf-8";
+
+
+/* @imports.
+   -------------------------------------------------------------------------- */
+@import "https://unpkg.com/modern-normalize@^0.5.0/modern-normalize.css";
+@import "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css";
+@import "https://fonts.googleapis.com/css?family=Gothic+A1:400,900|Inconsolata";
+
+
+/* Variables.
+   -------------------------------------------------------------------------- */
+:root {
+  --dark: #050505;
+  --light: #F7F7F7;
+  --accent: #20A7F2;
+  --skew-height: 3.5vw;
+}
+
+
+/* Base.
+   -------------------------------------------------------------------------- */
+::selection {
+  background-color: var(--accent);
+  color: var(--dark);
+  text-shadow: none;
+}
+
+
+/* Typography.
+   -------------------------------------------------------------------------- */
+html {
+  /* From CSS-Tricks: https://css-tricks.com/snippets/css/fluid-typography/ */
+  /* Have root font sizes scale from 14-22px through 400-1600px viewport */
+  font-size: calc(14px + (22 - 14) * ((100vw - 400px) / (1600 - 400)));
+}
+
+body {
+  font-family: Gothic A1, Helvetica Neue, Helvetica, Arial, sans-serif;
+  line-height: 1.4;
+  background-color: var(--light);
+}
+
+main a {
+  color: var(--dark);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.hljs {
+  background-color: #fcfcfc;
+  border-radius: 3px;
+  padding: .75em 1em;
+  border: 1px solid #ccc;
+}
+
+:not(pre) > code {
+  display: inline-block;
+  padding: .1em .2em;
+  background-color: #fcfcfc;
+  border: 1px solid #ccc;
+  color: var(--accent);
+  border-radius: 3px;
+  font-size: smaller;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: Inconsolata, Consolas, Monaco, monospace;
+}
+
+p {
+ hyphens: auto;
+ hyphenate-limit-chars: 6 3 3;
+ hyphenate-limit-lines: 2;
+ hyphenate-limit-last: always;
+ hyphenate-limit-zone: 8%;
+}
+
+
+/* Layout.
+   -------------------------------------------------------------------------- */
+main {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 1rem;
+}
+
+  main > * + * {
+    margin-top: 4rem;
+  }
+
+li + li {
+  margin-top: .5em;
+}
+
+ol,
+ul {
+  padding-left: 1em;
+  margin-bottom: 0;
+}
+
+section > h2 {
+  border-bottom: 2px solid var(--dark);
+}
+
+section h3 {
+  margin-bottom: 0;
+  margin-top: 1.5rem;
+}
+
+  section h3 + * {
+    margin-top: .5rem;
+  }
+
+h4,
+h5 {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+h3 + h5,
+h4 + h5 {
+  margin-top: .5rem;
+  margin-bottom: 0;
+}
+
+  h3 + h5 + *,
+  h4 + h5 + * {
+    margin-top: .5rem;
+  }
+
+
+/* Header.
+   -------------------------------------------------------------------------- */
+.header {
+  background-color: var(--accent);
+  color: var(--dark);
+  text-align: center;
+  padding: 2em 1em 2em;
+}
+
+  .header__logotype {
+    max-width: 100%;
+    width: 20rem;
+    padding: 1em 0 1em;
+  }
+
+  .header__tagline {
+    font-size: 1.5em;
+    margin: 0;
+    padding: 1em 0 2em;
+  }
+
+  .header__btn {
+    text-decoration: none;
+    color: var(--dark);
+    padding: 0.6em 0.5em 0.5em;
+    font-weight: bold;
+    font-size: 1.2em;
+    border: 2px solid var(--dark);
+    margin: 1em;
+    display: inline-block;
+    min-width: 15rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header__btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark);
+    transform: rotate(-45deg) translate(calc(100% - .75em), calc(100% - .75em));
+    transform-origin: 100% 100%;
+    transition: transform .2s ease-out;
+  }
+
+  .header__btn:hover::before {
+    transition: transform .2s ease-in;
+    transform: rotate(-45deg) translate(calc(100% - .5em), calc(100% - .5em));
+  }
+
+    .header__btn span {
+      display: inline-block;
+      transition: transform .2s ease-out;
+    }
+
+    .header__btn:hover span {
+      transition: transform .2s ease-in;
+      transform: translateX(.25em);
+    }
+
+  @media (max-width: 30rem) {
+    .github-corner {
+      display: none;
+    }
+
+    .header__btn {
+      width: 85%;
+    }
+  }
+
+
+/* Footer.
+   -------------------------------------------------------------------------- */
+.footer {
+  background-color: #1f1f1f;
+  color: var(--light);
+  text-align: center;
+  padding: 3em 1em 4em;
+}
+
+  .footer a {
+    color: var(--light);
+  }
+
+  .footer a:hover {
+    color: #ababab;
+  }
+
+  .footer small {
+    font-size: 0.75rem;
+    opacity: 0.25;
+  }
+
+
+/* Component: Pros/Cons.
+   -------------------------------------------------------------------------- */
+.compare {
+  display: flex;
+}
+
+  .compare__pros,
+  .compare__cons {
+    width: 50%;
+  }
+
+  .compare__pros ul,
+  .compare__cons ul {
+    list-style: none;
+    padding-left: .5em;
+  }
+
+  .compare__pros li::before {
+    content: "✓";
+    color: #35A00B;
+    padding-right: .5em;
+  }
+
+  .compare__cons li::before {
+    content: "✘";
+    color: #AD1313;
+    padding-right: .5em;
+  }
+
+  @media (max-width: 30rem) {
+    .compare__pros,
+    .compare__cons {
+      width: 100%;
+    }
+
+    .compare {
+      flex-wrap: wrap;
+    }
+  }
+
+
+/* Component: Header Hash Link.
+   -------------------------------------------------------------------------- */
+.header-hash {
+  text-decoration: none;
+  opacity: .35;
+  padding-right: .25em;
+}
+
+.header-hash:hover {
+  opacity: 1;
+}
+
+
+/* Component: Heart(beat).
+   -------------------------------------------------------------------------- */
+.heart {
+  color: #f00;
+  animation: heartbeat 1.5s infinite;
+  display: inline-block;
+}
+
+@keyframes heartbeat {
+  0%, 20%, 50%, 80%, 100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+}
+
+
+/* Component: External Link URL Display.
+   -------------------------------------------------------------------------- */
+main a[href*="//"]:not([href*="meed.js.org/"]) {
+  position: relative;
+}
+
+  main a[href*="//"]:not([href*="meed.js.org/"])::after {
+    display: none;
+    content: attr(href);
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + .2em);
+    padding: .1em .2em;
+    background-color: var(--accent);
+    opacity: .95;
+    font-size: .8em;
+    color: var(--light);
+    white-space: nowrap;
+  }
+
+  main a[href*="//"]:not([href*="meed.js.org/"]):hover::after {
+    display: block;
+  }
+
+
+/* Enhancement: Polygon Shapes/Masking.
+   -------------------------------------------------------------------------- */
+@supports (clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--skew-height)), 0 100%)) {
+  .header {
+    padding: 2em 1em calc(2em + var(--skew-height));
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - var(--skew-height)),
+      0 100%
+    );
+  }
+
+  .footer {
+    padding: calc(3em + var(--skew-height)) 1em 4em;
+    /* Pointing down */
+    clip-path: polygon(
+      0 0,
+      50% calc(0% + var(--skew-height)),
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+    /* Pointing up */
+    /* clip-path: polygon(
+      0 calc(0% + var(--skew-height)),
+      50% 0,
+      100% calc(0% + var(--skew-height)),
+      100% 100%,
+      0 100%
+    ); */
+  }
+
+  main {
+    margin-top: calc(var(--skew-height) * -1);
+  }
+}
